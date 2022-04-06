@@ -7,12 +7,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-class Testlink:
+
+class Testaction2:
     baseUrl = ReadConfig.getApplicationURL()
     username = ReadConfig.getUseremail()
     password = ReadConfig.getPassword()
 
-    def test_link(self, setup):
+    def test_share(self, setup):
         self.driver = setup
         self.driver.get(self.baseUrl)
         self.driver.maximize_window()
@@ -23,7 +24,14 @@ class Testlink:
         self.lp.clickLogin()
         time.sleep(5)
         share = self.driver.find_element(By.XPATH, "//*[@id='gfb_app']/main/div/div/div[1]/div[2]/button/i")
-        share.click()
-        time.sleep(4)
-        link = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/form/div[6]/p/a").get_attribute("href")
-        link.click()
+        if (share.is_displayed()):
+            share.click()
+            assert True
+        else:
+            assert False
+        self.driver.close()
+
+
+
+
+
